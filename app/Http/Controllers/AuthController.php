@@ -39,7 +39,7 @@ class AuthController extends Controller
             'role' => 'user',
         ]);
 
-        return redirect()->route('auth.login.form')->with('success', __('auth.register_success'));
+        return redirect()->route('login')->with('success', __('auth.register_success'));
     }
 
     public function login(Request $request)
@@ -61,10 +61,9 @@ class AuthController extends Controller
 
         return redirect()->route('suratMasuk.index');
     }
-
     public function logout()
     {
-        Auth::logout(); // Ends the user session
-        return redirect()->route('auth.login.form')->with('success', __('auth.logout_success'));
+        Auth::logout(); // Logs out the authenticated user
+        return redirect()->route('auth.login'); // Redirects to the login page
     }
 }

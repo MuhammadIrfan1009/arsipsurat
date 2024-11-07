@@ -16,7 +16,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $suratMasuk = SuratMasuk::all(); // Fetch all incoming letters
+        $suratMasuk = SuratMasuk::all(); 
         return view('suratmasuk.index', compact('suratMasuk'));
     }
 

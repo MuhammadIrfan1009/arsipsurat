@@ -1,59 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 100px;
-            max-width: 500px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2 class="text-center">Register</h2>
-        <form action="{{ route('auth.register') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="nama">Nama</label>
-                <input type="text" name="nama" class="form-control" id="nama" required>
-                @error('nama')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+@extends('layouts.app')
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" class="form-control" id="email" required>
-                @error('email')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+@section('title', 'Register')
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" required>
-                @error('password')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+@section('content')
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <div class="card" style="max-width: 500px; margin: auto;">
+                <div class="card-body">
+                    <!-- Logo or Branding -->
+                    <div class="app-brand justify-content-center mb-4">
+                    <img src="{{ asset('assets/img/favicon/favicon.png') }}" alt="YourApp Logo" class="app-brand-logo demo" style="height: 100px;">
+                    </a>
+                    </div>
+                    <!-- /Logo or Branding -->
 
-            <div class="form-group">
-                <label for="password_confirmation">Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
-            </div>
+                    <h4 class="mb-2 text-center">Welcome! 🚀</h4>
+                    <p class="mb-4 text-center">Silahkan mendaftar jika belum memiliki akun.</p>
 
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-            <p class="text-center mt-3">
-                Sudah punya akun? <a href="{{ route('auth.login.form') }}">Login di sini</a>
-            </p>
-        </form>
+                    <form action="{{ route('auth.register') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" name="nama" class="form-control" id="nama" required>
+                            @error('nama')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group input-group-merge">
+                                <input type="password" name="password" class="form-control" id="password" required>
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                            @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary d-grid w-100">Register</button>
+                        <p class="text-center mt-3">
+                            Sudah punya akun? <a href="{{ route('login') }}">Login di sini</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+
+@endsection
