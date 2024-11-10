@@ -8,17 +8,18 @@
         <div class="authentication-inner">
             <div class="card" style="max-width: 500px; margin: auto;">
                 <div class="card-body">
-                    <!-- Logo or Branding -->
+                    <!-- Logo atau Branding -->
                     <div class="app-brand justify-content-center mb-4">
                         <a href="{{ url('/') }}" class="app-brand-link gap-2">
                             <img src="{{ asset('assets/img/favicon/favicon.png') }}" alt="YourApp Logo" class="app-brand-logo demo" style="height: 100px;">
                         </a>
                     </div>
-                    <!-- /Logo or Branding -->
+                    <!-- /Logo atau Branding -->
 
                     <h4 class="mb-2 text-center">Welcome Back! 🚀</h4>
                     <p class="mb-4 text-center">Silahkan Login.</p>
 
+                    <!-- Pesan Kesalahan -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -27,13 +28,17 @@
                                 @endforeach
                             </ul>
                         </div>
+                    @elseif (session('status') == 'pending')
+                        <div class="alert alert-warning">
+                            Akun Anda masih menunggu persetujuan dari admin. Silakan coba lagi nanti.
+                        </div>
                     @endif
                     
                     <form action="{{ route('auth.login') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" required>
+                            <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" required autofocus>
                         </div>
                         
                         <div class="mb-3">

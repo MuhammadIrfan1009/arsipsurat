@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
 
 @section('title', 'Home')
 
@@ -15,10 +15,15 @@
                 @csrf
                 <button type="submit" class="btn btn-primary">Surat Masuk</button>
             </form>
-            <form action="{{ route('suratMasuk.index') }}" method="GET" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn btn-primary">Cek akses</button>
-            </form>
+            
+            <!-- Update Route for Cek Akses -->
+            @if (Auth::user()->role == 'admin') <!-- Optional: Only show for admin -->
+                <form action="{{ route('user_approval.index') }}" method="GET" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Cek Akses</button>
+                </form>
+            @endif
+
             <form action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>

@@ -22,6 +22,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        // Validasi input
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -32,18 +33,22 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        // Membuat pengguna baru dengan status 'pending'
         User::create([
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'user',
+            'status' => 'pending', // Set status awal sebagai 'pending'
         ]);
 
-        return redirect()->route('login')->with('success', __('auth.register_success'));
+        // Redirect ke halaman login dengan pesan sukses
+        return redirect()->route('login')->with('success', 'Pendaftaran berhasil. Akun Anda menunggu persetujuan.');
     }
 
     public function login(Request $request)
     {
+        // Validasi input login
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -54,16 +59,26 @@ class AuthController extends Controller
         }
 
         $credentials = $request->only('email', 'password');
+        $user = User::where('email', $request->email)->first();
 
-        if (!Auth::attempt($credentials)) {
-            return redirect()->back()->withErrors(['email' => __('auth.failed')])->withInput();
+        // Periksa apakah pengguna ada dan apakah statusnya 'approved'
+        if ($user && $user->status !== 'approved') {
+            return redirect()->back()->withErrors(['email' => 'Akun Anda menunggu persetujuan.'])->withInput();
         }
 
+        // Autentikasi pengguna
+        if (!Auth::attempt($credentials)) {
+            return redirect()->back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
+        }
+
+        // Redirect ke halaman utama setelah login berhasil
         return redirect()->route('suratMasuk.index');
     }
+
     public function logout()
     {
-        Auth::logout(); // Logs out the authenticated user
-        return redirect()->route('auth.login'); // Redirects to the login page
+        // Logout pengguna yang sedang aktif
+        Auth::logout();
+        return redirect()->route('login'); // Redirect ke halaman login
     }
 }
