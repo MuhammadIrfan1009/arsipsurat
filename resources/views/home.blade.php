@@ -4,13 +4,12 @@
 
 @section('content')
     <div class="container">
-        <h1>Welcome to eKomdigi</h1>
+        <h1>Selamat datang di E-Komdigi</h1>
 
         @if (Auth::check())
-            <p>Hello, {{ Auth::user()->nama }}!</p>
+            <p>Hello, {{ Auth::user()->username }}!</p>
             <p>Your role is: {{ Auth::user()->role }}</p>
 
-            <h2>Your Dashboard</h2>
             <form action="{{ route('suratMasuk.index') }}" method="GET" style="display: inline;">
                 @csrf
                 <button type="submit" class="btn btn-primary">Surat Masuk</button>
@@ -29,7 +28,7 @@
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         @else
-            <p>Please <a href="{{ route('auth.login') }}">login</a> to access your dashboard.</p>
+            <p>Mohon <a href="{{ route('auth.login') }}">login</a> untuk mengakses dashboard.</p>
         @endif
     </div>
 @endsection

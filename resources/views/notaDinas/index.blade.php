@@ -5,12 +5,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Surat Masuk</span></h4>
 
         <div class="mb-3">
-            <!-- Show 'Add New Letter' button only if the user is authenticated -->
-            @auth
-                <a href="{{ route('suratMasuk.create') }}" class="btn btn-primary">Tambah Surat Baru</a>
-            @else
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Tambah Surat Baru</button>
-            @endauth
+            <a href="{{ route('suratMasuk.create') }}" class="btn btn-primary">Add New Letter</a>
         </div>
 
         @if (session('success'))
@@ -25,6 +20,7 @@
             <div class="card">
                 <h5 class="card-header">Surat Masuk</h5>
                 <div class="table-responsive text-nowrap">
+                    
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -56,7 +52,6 @@
                                             <span class="text-muted">No file</span>
                                         @endif
                                     </td>
-
                                     <td>
                                         <!-- Dropdown for Actions -->
                                         <div class="dropdown">
@@ -67,26 +62,16 @@
                                                 <a class="dropdown-item" href="{{ route('suratMasuk.show', $surat->id) }}">
                                                     <i class="bx bx-eye me-1"></i> View
                                                 </a>
-                                                
-                                                <!-- Conditionally display the Edit button for authenticated users -->
-                                                @auth
-                                                    <a class="dropdown-item" href="{{ route('suratMasuk.edit', $surat->id) }}">
-                                                        <i class="bx bx-edit-alt me-1"></i> Edit
-                                                    </a>
-                                                    
-                                                    <form action="{{ route('suratMasuk.destroy', $surat->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Are you sure?')">
-                                                            <i class="bx bx-trash me-1"></i> Delete
-                                                        </button>
-                                                    </form>
-                                                @else
-                                                    <!-- If not authenticated, show the login modal -->
-                                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                                        <i class="bx bx-lock me-1"></i> Edit / Delete (Login Required)
+                                                <a class="dropdown-item" href="{{ route('suratMasuk.edit', $surat->id) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Edit
+                                                </a>
+                                                <form action="{{ route('suratMasuk.destroy', $surat->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Are you sure?')">
+                                                        <i class="bx bx-trash me-1"></i> Delete
                                                     </button>
-                                                @endauth
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
@@ -98,28 +83,4 @@
             </div>
         @endif
     </div>
-
-    <!-- Modal for Login and Cancel -->
-    @auth
-        <!-- If the user is authenticated, nothing is shown for login -->
-    @else
-        <!-- Show modal when trying to create, edit, or delete -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Anda harus login untuk melakukan tindakan ini. Apakah Anda ingin login?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endauth
 @endsection

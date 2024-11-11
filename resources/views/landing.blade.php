@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'e-komdigi')
+@section('title', 'E-Komdigi')
 
 @section('content')
     <div class="landing-page" style="position: relative; height: 100vh; background: url('{{ asset('assets/img/favicon/favicon.png') }}') no-repeat center center fixed; background-size: cover;">

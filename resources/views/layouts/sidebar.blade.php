@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     
     <!-- Icons & Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
@@ -23,27 +23,14 @@
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
-    <!-- Custom CSS untuk gaya aktif -->
+    <!-- Custom CSS -->
     <style>
-        .menu-item.active .menu-link {
-            background-color: #e0e7ff;
-            color: #4f46e5;
-        }
-        .menu-item.active .menu-icon {
-            color: #4f46e5;
-        }
-        .bg-label-baru {
-    background-color: #007bff; /* Blue for "baru" */
-}
-
-.bg-label-diproses {
-    background-color: #ffc107; /* Yellow for "diproses" */
-}
-
-.bg-label-selesai {
-    background-color: #28a745; /* Green for "selesai" */
-}
-
+        .custom-font-size { font-size: 24px; }
+        .menu-item.active .menu-link { background-color: #e0e7ff; color: #4f46e5; }
+        .menu-item.active .menu-icon { color: #4f46e5; }
+        .bg-label-baru { background-color: #007bff; }
+        .bg-label-diproses { background-color: #ffc107; }
+        .bg-label-selesai { background-color: #28a745; }
     </style>
 </head>
 <body>
@@ -56,7 +43,7 @@
                         <span class="app-brand-logo demo">
                             <!-- SVG Logo (dapat diisi sesuai kebutuhan) -->
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">E-Komdigi</span>
+                        <span class="demo menu-text fw-bolder ms-3 custom-font-size">E-Komdigi</span>
                     </a>
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -83,6 +70,22 @@
                         </a>
                     </li>
 
+                    <!-- Surat Keluar -->
+                    <li class="menu-item {{ request()->is('suratKeluar*') ? 'active' : '' }}">
+                        <a href="{{ route('suratKeluar.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-send"></i>
+                            <div>Surat Keluar</div>
+                        </a>
+                    </li>
+
+                    <!-- Nota Dinas -->
+                    <li class="menu-item {{ request()->is('notaDinas*') ? 'active' : '' }}">
+                        <a href="{{ route('notaDinas.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-file"></i>
+                            <div>Nota Dinas</div>
+                        </a>
+                    </li>
+
                     <!-- Cek Akses (Admin Only) -->
                     @if (Auth::check() && Auth::user()->role == 'admin')
                     <li class="menu-item {{ Route::is('user_approval.index') ? 'active' : '' }}">
@@ -91,23 +94,27 @@
                             <div>Cek Akses</div>
                         </a>
                     </li>
-
                     @endif
 
-
-                   <!-- Logout -->
-                <li class="menu-item">
-                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <!-- Using anchor tag instead of button -->
-                        <a href="#" class="menu-link text-danger" onclick="document.getElementById('logout-form').submit();" style="text-decoration: none;">
-                            <i class="menu-icon tf-icons bx bx-power-off"></i>
-                            <div>Logout</div>
-                        </a>
-                    </form>
-                </li>
-
-
+                    <!-- Login/Logout -->
+                    @if (Auth::check())
+                        <li class="menu-item">
+                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <a href="#" class="menu-link text-danger" onclick="document.getElementById('logout-form').submit();" style="text-decoration: none;">
+                                    <i class="menu-icon tf-icons bx bx-power-off"></i>
+                                    <div>Logout</div>
+                                </a>
+                            </form>
+                        </li>
+                    @else
+                        <li class="menu-item {{ request()->is('auth/login') ? 'active' : '' }}">
+                            <a href="{{ route('login') }}" class="menu-link" style="color: #007bff;">
+                                <i class="menu-icon tf-icons bx bx-log-in"></i>
+                                <div>Login</div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </aside>
             <!-- /Sidebar -->

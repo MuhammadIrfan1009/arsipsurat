@@ -1,41 +1,51 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SuratMasukController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserApprovalController;
+use App\Http\Controllers\{
+    AuthController,
+    SuratMasukController,
+    HomeController,
+    UserApprovalController,
+    SuratKeluarController,
+    NotaDinasController
+};
 use App\Http\Middleware\AdminMiddleware;
 
 
-// Redirect root to landing page
-Route::redirect('/', '/landing'); // Mengarahkan root ke halaman /landing
+Route::redirect('/', '/landing'); 
 
-// Halaman landing page yang bisa diakses tanpa login
+// Landing page 
 Route::get('/landing', function () {
-    return view('landing'); // Menampilkan view landing
+    return view('landing');
 })->name('landing');
 
-// Rute untuk halaman home setelah login
+// Home 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Authentication routes
+// Authentication
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/auth/login', 'showLoginForm')->name('login')->middleware('guest'); // Ubah nama rute menjadi 'login'
+    Route::get('/auth/login', 'showLoginForm')->name('login')->middleware('guest');
     Route::post('/auth/login', 'login')->name('auth.login');
     Route::get('/auth/register', 'showRegisterForm')->name('auth.register.form');
     Route::post('/auth/register', 'register')->name('auth.register');
     Route::post('/logout', 'logout')->name('auth.logout');
 });
 
-// Admin routes with AdminMiddleware
+// admin appprove user
 Route::middleware([AdminMiddleware::class])->group(function () {
-    // User approval routes
     Route::get('/user-approval', [UserApprovalController::class, 'index'])->name('user_approval.index');
     Route::post('/user-approval/{id}/approve', [UserApprovalController::class, 'approve'])->name('user_approval.approve');
 });
-// Authenticated user routes
+
+
 Route::middleware('auth')->group(function () {
-    // Surat Masuk routes
-    Route::resource('suratMasuk', SuratMasukController::class);
+
+    Route::resource('suratMasuk', SuratMasukController::class)->except(['index', 'show']);
+    Route::resource('suratKeluar', SuratKeluarController::class)->except(['index', 'show']);
+    Route::resource('notaDinas', NotaDinasController::class)->except(['index', 'show']);
 });
+
+
+Route::resource('suratMasuk', SuratMasukController::class)->only(['index', 'show']);
+Route::resource('suratKeluar', SuratKeluarController::class)->only(['index', 'show']);
+Route::resource('notaDinas', NotaDinasController::class)->only(['index', 'show']);

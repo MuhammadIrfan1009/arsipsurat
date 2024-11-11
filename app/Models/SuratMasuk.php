@@ -29,6 +29,8 @@ class SuratMasuk extends Model
         'isi',
         'status',
         'file_path',
+        'jenis_layanan',
+        'username',
     ];
 
     /**

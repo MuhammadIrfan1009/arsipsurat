@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container">
-    <h1>User Approval</h1>
+    <h1>Persetujuan User</h1>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -31,7 +31,7 @@
                     <td>
                         <form action="{{ route('user_approval.approve', $user->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-success">Approve</button>
+                            <button type="submit" class="btn btn-success">Setuju</button>
                         </form>
                     </td>
                 </tr>

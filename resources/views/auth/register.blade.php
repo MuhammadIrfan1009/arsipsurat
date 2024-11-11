@@ -27,9 +27,9 @@
                     <form action="{{ route('auth.register') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama</label>
-                            <input type="text" name="nama" class="form-control" id="nama" value="{{ old('nama') }}" required>
-                            @error('nama')
+                            <label for="username" class="form-label">Nama</label>
+                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}" required>
+                            @error('username')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
