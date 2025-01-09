@@ -41,4 +41,13 @@ class SuratMasuk extends Model
     protected $casts = [
         'tanggal' => 'date',
     ];
+
+    
+    public function getTahunTanggalAttribute()
+    {
+        return $this->tanggal ? $this->tanggal->format('Y') : null;
+    }
+
+    
+    protected $appends = ['tahun_tanggal'];
 }

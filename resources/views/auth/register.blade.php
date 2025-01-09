@@ -12,7 +12,7 @@
                     <div class="app-brand justify-content-center mb-4">
                         <img src="{{ asset('assets/img/favicon/favicon.png') }}" alt="YourApp Logo" class="app-brand-logo demo" style="height: 100px;">
                     </div>
-                    <!-- /Logo atau Branding -->
+                   
 
                     <h4 class="mb-2 text-center">Welcome! 🚀</h4>
                     <p class="mb-4 text-center">Silahkan mendaftar jika belum memiliki akun.</p>
