@@ -19,21 +19,18 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('perihal');
             $table->text('isi');
-            $table->enum('status', ['baru', 'proses', 'selesai'])->default('baru');
+            $table->enum('status', ['Baru', 'Menanggapi','Menunggu Keputusan', 'Telah Diarsip'])->default('Baru');
             $table->string('file_path')->nullable();
             $table->string('jenis_layanan')->nullable();
-            $table->string('username'); 
-
+            $table->string('username');
             $table->timestamps();
-
-           
+            
             $table->year('tahun_tanggal')->virtualAs('YEAR(tanggal)');
         });
 
-        // Add the unique index that includes the generated year column
         DB::statement('
-            CREATE UNIQUE INDEX unique_nomor_surat_pengirim_year 
-            ON surat_masuk (nomor_surat, pengirim, tahun_tanggal)
+            CREATE UNIQUE INDEX unique_nomor_surat_year 
+            ON surat_masuk (nomor_surat, tahun_tanggal)
         ');
     }
 

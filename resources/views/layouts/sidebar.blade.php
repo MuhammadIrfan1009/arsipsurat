@@ -28,9 +28,9 @@
         .custom-font-size { font-size: 24px; }
         .menu-item.active .menu-link { background-color: #e0e7ff; color: #4f46e5; }
         .menu-item.active .menu-icon { color: #4f46e5; }
-        .bg-label-baru { background-color: #007bff; }
-        .bg-label-diproses { background-color: #ffc107; }
-        .bg-label-selesai { background-color: #28a745; }
+
+
+
     </style>
 </head>
 <body>
@@ -69,6 +69,7 @@
                             <div>Surat Masuk</div>
                         </a>
                     </li>
+                    
 
                     <!-- Surat Keluar -->
                     <li class="menu-item {{ request()->is('suratKeluar*') ? 'active' : '' }}">
@@ -121,6 +122,7 @@
             
             <div class="layout-page">
                 <div class="container-fluid mt-4">
+                    <!-- Content Section -->
                     @yield('content')
                 </div>
             </div>
@@ -135,7 +137,20 @@
     <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTable Initialization Script -->
+    <script>
+        $(document).ready(function() {
+            $('#suratMasukTable').DataTable();
+        });
+        
+    </script>
+
+
+    
 </body>
 </html>

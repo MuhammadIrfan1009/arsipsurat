@@ -14,7 +14,7 @@
                             <img src="{{ asset('assets/img/favicon/favicon.png') }}" alt="YourApp Logo" class="app-brand-logo demo" style="height: 100px;">
                         </a>
                     </div>
-                    <!-- /Logo atau Branding -->
+                   
 
                     <h4 class="mb-2 text-center">Welcome Back! 🚀</h4>
                     <p class="mb-4 text-center">Silahkan Login.</p>
@@ -51,7 +51,8 @@
                         
                         <button type="submit" class="btn btn-primary d-grid w-100">Login</button>
                         <p class="text-center mt-3">
-                            Belum punya akun? <a href="{{ route('auth.register.form') }}">Daftar di sini</a>
+                            Belum punya akun? <a href="{{ route('auth.register.form') }}">Daftar di sini</a> <br>
+                            <br> <a href="{{ route('home') }}">Klik disini untuk masuk tanpa Login</a>
                         </p>
                     </form>
                 </div>

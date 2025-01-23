@@ -5,72 +5,76 @@ namespace App\Http\Controllers;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class SuratMasukController extends Controller
 {
-   
-
-    // Display a listing of SuratMasuk
     public function index()
     {
         $suratMasuk = SuratMasuk::all();
         return view('suratmasuk.index', compact('suratMasuk'));
     }
 
-    // Show the form for creating a new SuratMasuk
     public function create()
     {
-        return view('suratMasuk.create');
+        return view('suratmasuk.create');
     }
 
-    // Store a newly created SuratMasuk in storage
     public function store(Request $request)
     {
-        // Validate incoming request
         $validated = $request->validate([
             'nomor_surat' => 'required|string|max:255',
             'pengirim' => 'required|string|max:255',
             'tanggal' => 'required|date',
             'perihal' => 'required|string|max:255',
             'isi' => 'required|string',
-            'status' => 'required|in:baru,proses,selesai',
+            'status' => 'required|in:Baru,Menanggapi,Menunggu Keputusan,Telah Diarsip',
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'jenis_layanan' => 'nullable|string|max:255',
-            'jenis_layanan_lainnya' => 'nullable|string|max:255',  // Add validation for 'jenis_layanan_lainnya'
+            'jenis_layanan_lainnya' => 'nullable|string|max:255',  
         ]);
 
-        // Check if "Lainnya" is selected and a custom service type is provided
-        if ($request->jenis_layanan === 'Lainnya' && $request->filled('jenis_layanan_lainnya')) {
-            $validated['jenis_layanan'] = $request->jenis_layanan_lainnya;
+        $validated['tahun_tanggal'] = date('Y', strtotime($request->tanggal));
+    
+        $existingSurat = SuratMasuk::where('nomor_surat', $request->nomor_surat)
+                                    ->where('pengirim', $request->pengirim)
+                                    ->whereYear('tanggal', $validated['tahun_tanggal'])
+                                    ->first();
+    
+        if ($existingSurat) {
+            return redirect()->back()->with('warning', 'Data dengan kombinasi nomor surat, pengirim, dan tahun yang sama sudah ada.');
         }
-
-        // Handle file upload if present
+    
         if ($request->hasFile('file')) {
             $validated['file_path'] = $request->file('file')->store('uploads/surat_masuk', 'public');
         }
-
-        // Automatically set username based on the authenticated user
+    
         $validated['username'] = auth()->user()->username;
-
-        // Create SuratMasuk record
-        SuratMasuk::create($validated);
-
-        return redirect()->route('suratMasuk.index')->with('success', 'Incoming letter created successfully!');
+    
+        try {
+            SuratMasuk::create($validated);
+            return redirect()->route('suratMasuk.index')->with('success', 'Surat Masuk berhasil ditambahkan!');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return redirect()->back()->with('warning', 'Data dengan kombinasi nomor surat, pengirim, dan tahun yang sama sudah ada.');
+            }
+            return redirect()->back()->with('error', 'Terjadi kesalahan, silakan coba lagi.');
+        }
     }
 
-    // Display the specified SuratMasuk
+
+
     public function show(SuratMasuk $suratMasuk)
     {
         return view('suratmasuk.show', compact('suratMasuk'));
     }
 
-    // Show the form for editing the specified SuratMasuk
     public function edit(SuratMasuk $suratMasuk)
     {
         return view('suratmasuk.edit', compact('suratMasuk'));
     }
 
-    // Update the specified SuratMasuk in storage
     public function update(Request $request, SuratMasuk $suratMasuk)
     {
         $validated = $request->validate([
@@ -79,43 +83,42 @@ class SuratMasukController extends Controller
             'tanggal' => 'required|date',
             'perihal' => 'required|string|max:255',
             'isi' => 'required|string',
-            'status' => 'required|in:baru,proses,selesai',
+            'status' => 'required|in:Baru,Menanggapi,Menunggu Keputusan,Telah Diarsip',
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'jenis_layanan' => 'nullable|string|max:255',
             'jenis_layanan_lainnya' => 'nullable|string|max:255',
         ]);
 
-        // Check if "Lainnya" is selected and a custom service type is provided
         if ($request->jenis_layanan === 'Lainnya' && $request->filled('jenis_layanan_lainnya')) {
             $validated['jenis_layanan'] = $request->jenis_layanan_lainnya;
         }
 
-        // Handle file upload if present
         if ($request->hasFile('file')) {
-            // Delete old file if it exists
             if ($suratMasuk->file_path) {
                 Storage::delete('public/' . $suratMasuk->file_path);
             }
             $validated['file_path'] = $request->file('file')->store('uploads/surat_masuk', 'public');
         }
 
-        // Update SuratMasuk record
-        $suratMasuk->update($validated);
-
-        return redirect()->route('suratMasuk.index')->with('success', 'Surat Masuk updated successfully!');
+        try {
+            $suratMasuk->update($validated);
+            return redirect()->route('suratMasuk.index')->with('success', 'Surat Masuk berhasil diubah!');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return redirect()->back()->with('warning', 'Data dengan kombinasi nomor surat, pengirim, dan tahun yang sama sudah ada.');
+            }
+            return redirect()->back()->with('error', 'Terjadi kesalahan, silakan coba lagi.');
+        }
     }
 
-    // Remove the specified SuratMasuk from storage
     public function destroy(SuratMasuk $suratMasuk)
     {
-        // Delete file if it exists
         if ($suratMasuk->file_path) {
             Storage::disk('public')->delete($suratMasuk->file_path);
         }
 
-        // Delete SuratMasuk record
         $suratMasuk->delete();
 
-        return redirect()->route('suratMasuk.index')->with('success', 'Incoming letter deleted successfully!');
+        return redirect()->route('suratMasuk.index')->with('success', 'Surat Masuk berhasil dihapus!');
     }
 }

@@ -24,8 +24,8 @@
         @else
             <div class="card">
                 <h5 class="card-header">Surat Masuk</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover">
+                <div class="table-responsive text-nowrap p-3"> <!-- Added padding here -->
+                    <table id="suratMasukTable" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -34,7 +34,7 @@
                                 <th>Tanggal</th>
                                 <th>Perihal</th>
                                 <th>Status</th>
-                                <th>File</th>
+                                <th>Selengkapnya</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -47,14 +47,10 @@
                                     <td>{{ $surat->tanggal->format('d-m-Y') }}</td>
                                     <td>{{ $surat->perihal }}</td>
                                     <td>
-                                        <span class="badge bg-label-{{ strtolower($surat->status) }} me-1">{{ ucfirst($surat->status) }}</span>
+                                        <span>{{ ucfirst($surat->status) }}</span>
                                     </td>
                                     <td>
-                                        @if($surat->file_path)
-                                            <a href="{{ asset('storage/' . $surat->file_path) }}" target="_blank" class="btn btn-secondary btn-sm">Download</a>
-                                        @else
-                                            <span class="text-muted">No file</span>
-                                        @endif
+                                        <a href="{{ route('suratMasuk.show', $surat->id) }}" target="_blank" class="btn btn-secondary btn-sm">View</a>
                                     </td>
 
                                     <td>
