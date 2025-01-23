@@ -26,6 +26,8 @@
                 <h5 class="card-header">Surat Masuk</h5>
                 <div class="table-responsive text-nowrap p-3"> <!-- Added padding here -->
                     <table id="suratMasukTable" class="table table-hover">
+                <div class="table-responsive text-nowrap p-3"> <!-- Added padding here -->
+                    <table id="suratMasukTable" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -34,6 +36,7 @@
                                 <th>Tanggal</th>
                                 <th>Perihal</th>
                                 <th>Status</th>
+                                <th>Selengkapnya</th>
                                 <th>Selengkapnya</th>
                                 <th>Actions</th>
                             </tr>
@@ -48,8 +51,10 @@
                                     <td>{{ $surat->perihal }}</td>
                                     <td>
                                         <span>{{ ucfirst($surat->status) }}</span>
+                                        <span>{{ ucfirst($surat->status) }}</span>
                                     </td>
                                     <td>
+                                        <a href="{{ route('suratMasuk.show', $surat->id) }}" class="btn btn-secondary btn-sm">View</a>
                                         <a href="{{ route('suratMasuk.show', $surat->id) }}" target="_blank" class="btn btn-secondary btn-sm">View</a>
                                     </td>
 
