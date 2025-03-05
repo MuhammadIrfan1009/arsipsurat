@@ -23,7 +23,7 @@
         </div>
 
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success"> 
             {{ session('success') }}
         </div>
     @endif
@@ -154,7 +154,7 @@
                     <tbody class="table-border-bottom-0">
                         @foreach ($notaDinas as $index => $nota)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <td>{{  + 1 }}</td>
                                 <td>{{ $nota->nomor_surat }}</td>
                                 <td>{{ $nota->pengirim }}</td>
                                 <td>{{ $nota->penerima }}</td>
