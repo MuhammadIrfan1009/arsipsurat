@@ -121,4 +121,5 @@ class SuratKeluarController extends Controller
 
         return redirect()->route('suratKeluar.index')->with('success', 'Surat Keluar berhasil dihapus!');
     }
+
 }

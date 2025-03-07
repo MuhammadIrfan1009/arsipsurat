@@ -69,6 +69,7 @@
                             <div>Surat Masuk</div>
                         </a>
                     </li>
+                    
 
                     <!-- Surat Keluar -->
                     <li class="menu-item {{ request()->is('suratKeluar*') ? 'active' : '' }}">

@@ -40,65 +40,63 @@ class HomeController extends Controller
             ->groupBy('role')
             ->pluck('count', 'role');
 
-       // Surat Masuk Monthly Count by Year and Month
-// Surat Masuk Monthly Count by Year and Month
-$suratMasukMonthly = SuratMasuk::select(
-    DB::raw("YEAR(tanggal) as year"),
-    DB::raw("MONTHNAME(tanggal) as month"),
-    DB::raw("COUNT(*) as count")
-)
-->groupBy(\DB::raw("YEAR(tanggal)"), DB::raw("MONTH(tanggal)"), DB::raw("MONTHNAME(tanggal)"))
-->orderByRaw("YEAR(tanggal), MONTH(tanggal)")
-->get()
-->mapWithKeys(function ($item) {
-    $yearMonth = $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT); // e.g., "2024-01"
-    return [$yearMonth => $item->count];
-});
+        // Surat Masuk Monthly Count by Year and Month
+        // Surat Masuk Monthly Count by Year and Month
+        $suratMasukMonthly = SuratMasuk::select(
+            DB::raw("YEAR(tanggal) as year"),
+            DB::raw("MONTHNAME(tanggal) as month"),
+            DB::raw("COUNT(*) as count")
+        )
+        ->groupBy(DB::raw("YEAR(tanggal)"), DB::raw("MONTH(tanggal)"), DB::raw("MONTHNAME(tanggal)"))
+        ->orderByRaw("YEAR(tanggal), MONTH(tanggal)")
+        ->get()
+        ->mapWithKeys(function ($item) {
+            $yearMonth = $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT); // e.g., "2024-01"
+            return [$yearMonth => $item->count];
+        });
 
-// Surat Keluar Monthly Count by Year and Month
-$suratKeluarMonthly = SuratKeluar::select(
-    \DB::raw("YEAR(tanggal) as year"),
-    DB::raw("MONTHNAME(tanggal) as month"),
-    DB::raw("COUNT(*) as count")
-)
-->groupBy(DB::raw("YEAR(tanggal)"), DB::raw("MONTH(tanggal)"), DB::raw("MONTHNAME(tanggal)"))
-->orderByRaw("YEAR(tanggal), MONTH(tanggal)")
-->get()
-->mapWithKeys(function ($item) {
-    $yearMonth = $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT); // e.g., "2024-01"
-    return [$yearMonth => $item->count];
-});
+        // Surat Keluar Monthly Count by Year and Month
+        $suratKeluarMonthly = SuratKeluar::select(
+            DB::raw("YEAR(tanggal) as year"),
+            DB::raw("MONTHNAME(tanggal) as month"),
+            DB::raw("COUNT(*) as count")
+        )
+        ->groupBy(DB::raw("YEAR(tanggal)"), DB::raw("MONTH(tanggal)"), DB::raw("MONTHNAME(tanggal)"))
+        ->orderByRaw("YEAR(tanggal), MONTH(tanggal)")
+        ->get()
+        ->mapWithKeys(function ($item) {
+            $yearMonth = $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT); // e.g., "2024-01"
+            return [$yearMonth => $item->count];
+        });
 
 // Nota Dinas Monthly Count by Year and Month
-$notaDinasMonthly = NotaDinas::select(
-    DB::raw("YEAR(tanggal) as year"),
-    DB::raw("MONTHNAME(tanggal) as month"),
-    DB::raw("COUNT(*) as count")
-)
-->groupBy(DB::raw("YEAR(tanggal)"), DB::raw("MONTH(tanggal)"), DB::raw("MONTHNAME(tanggal)"))
-->orderByRaw("YEAR(tanggal), MONTH(tanggal)")
-->get()
-->mapWithKeys(function ($item) {
-    $yearMonth = $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT); // e.g., "2024-01"
-    return [$yearMonth => $item->count];
-});
+        $notaDinasMonthly = NotaDinas::select(
+            DB::raw("YEAR(tanggal) as year"),
+            DB::raw("MONTHNAME(tanggal) as month"),
+            DB::raw("COUNT(*) as count")
+        )
+        ->groupBy(DB::raw("YEAR(tanggal)"), DB::raw("MONTH(tanggal)"), DB::raw("MONTHNAME(tanggal)"))
+        ->orderByRaw("YEAR(tanggal), MONTH(tanggal)")
+        ->get()
+        ->mapWithKeys(function ($item) {
+            $yearMonth = $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT); // e.g., "2024-01"
+            return [$yearMonth => $item->count];
+        });
 
 
 
-return view('home', compact(
-    'totalSuratMasuk',
-    'totalSuratKeluar',
-    'totalNotaDinas',
-    'totalUsers',
-    'jenisLayananSuratMasuk',
-    'jenisLayananSuratKeluar',
-    'jenisLayananNotaDinas',
-    'roleUsers',
-    'suratMasukMonthly',
-    'suratKeluarMonthly',
-    'notaDinasMonthly'
-));
-
-
+        return view('home', compact(
+            'totalSuratMasuk',
+            'totalSuratKeluar',
+            'totalNotaDinas',
+            'totalUsers',
+            'jenisLayananSuratMasuk',
+            'jenisLayananSuratKeluar',
+            'jenisLayananNotaDinas',
+            'roleUsers',
+            'suratMasukMonthly',
+            'suratKeluarMonthly',
+            'notaDinasMonthly'
+        ));
     }
 }
