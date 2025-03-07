@@ -60,10 +60,6 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('suratMasuk.show', $surat->id) }}">
-                                                    <i class="bx bx-eye me-1"></i> View
-                                                </a>
-                                                
                                                 <!-- Conditionally display the Edit button for authenticated users -->
                                                 @auth
                                                     <a class="dropdown-item" href="{{ route('suratMasuk.edit', $surat->id) }}">

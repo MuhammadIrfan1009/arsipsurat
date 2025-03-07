@@ -59,9 +59,6 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('suratKeluar.show', $surat->id) }}">
-                                                    <i class="bx bx-eye me-1"></i> View
-                                                </a>
                                                 @auth
                                                     <a class="dropdown-item" href="{{ route('suratKeluar.edit', $surat->id) }}">
                                                         <i class="bx bx-edit-alt me-1"></i> Edit
