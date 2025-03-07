@@ -46,6 +46,27 @@
     </div>
 
     <!-- Scripts -->
+    <script>
+        // Toggle Password Universal
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle toggle password untuk semua halaman
+            document.querySelectorAll('.password-toggle').forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    const inputGroup = this.closest('.input-group');
+                    const input = inputGroup.querySelector('input');
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle type input
+                    const type = input.type === 'password' ? 'text' : 'password';
+                    input.type = type;
+                    
+                    // Toggle ikon
+                    icon.classList.toggle('bx-hide');
+                    icon.classList.toggle('bx-show');
+                });
+            });
+        });
+    </script>
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>

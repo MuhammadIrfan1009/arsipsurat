@@ -45,7 +45,9 @@
                             <label for="password" class="form-label">Password</label>
                             <div class="input-group input-group-merge">
                                 <input type="password" name="password" class="form-control" id="password" required>
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                <span class="input-group-text cursor-pointer password-toggle">
+                                    <i class="bx bx-hide"></i>
+                                </span>
                             </div>
                         </div>
                         

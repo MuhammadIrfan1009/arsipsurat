@@ -13,12 +13,12 @@ class SuratKeluarController extends Controller
     public function index()
     {
         $suratKeluar = SuratKeluar::all();
-        return view('suratkeluar.index', compact('suratKeluar'));
+        return view('suratKeluar.index', compact('suratKeluar'));
     }
 
     public function create()
     {
-        return view('suratkeluar.create');
+        return view('suratKeluar.create');
     }
 
     public function store(Request $request)
@@ -72,7 +72,7 @@ class SuratKeluarController extends Controller
 
     public function edit(SuratKeluar $suratKeluar)
     {
-        return view('suratkeluar.edit', compact('suratKeluar'));
+        return view('suratKeluar.edit', compact('suratKeluar'));
     }
 
     public function update(Request $request, SuratKeluar $suratKeluar)

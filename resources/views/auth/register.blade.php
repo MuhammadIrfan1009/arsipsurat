@@ -46,7 +46,9 @@
                             <label for="password" class="form-label">Password</label>
                             <div class="input-group input-group-merge">
                                 <input type="password" name="password" class="form-control" id="password" required>
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                <span class="input-group-text cursor-pointer password-toggle">
+                                    <i class="bx bx-hide"></i>
+                                </span>
                             </div>
                             @error('password')
                                 <div class="text-danger">{{ $message }}</div>
@@ -55,7 +57,12 @@
 
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                            <div class="input-group input-group-merge">
+                                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                <span class="input-group-text cursor-pointer password-toggle">
+                                    <i class="bx bx-hide"></i>
+                                </span>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary d-grid w-100">Register</button>

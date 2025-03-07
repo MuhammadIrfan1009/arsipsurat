@@ -13,12 +13,12 @@ class SuratMasukController extends Controller
     public function index()
     {
         $suratMasuk = SuratMasuk::all();
-        return view('suratmasuk.index', compact('suratMasuk'));
+        return view('suratMasuk.index', compact('suratMasuk'));
     }
 
     public function create()
     {
-        return view('suratmasuk.create');
+        return view('suratMasuk.create');
     }
 
     public function store(Request $request)
@@ -67,12 +67,12 @@ class SuratMasukController extends Controller
 
     public function show(SuratMasuk $suratMasuk)
     {
-        return view('suratmasuk.show', compact('suratMasuk'));
+        return view('suratMasuk.show', compact('suratMasuk'));
     }
 
     public function edit(SuratMasuk $suratMasuk)
     {
-        return view('suratmasuk.edit', compact('suratMasuk'));
+        return view('suratMasuk.edit', compact('suratMasuk'));
     }
 
     public function update(Request $request, SuratMasuk $suratMasuk)

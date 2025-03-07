@@ -13,12 +13,12 @@ class NotaDinasController extends Controller
     public function index()
     {
         $notaDinas = NotaDinas::all();
-        return view('notadinas.index', compact('notaDinas'));
+        return view('notaDinas.index', compact('notaDinas'));
     }
 
     public function create()
     {
-        return view('notadinas.create');
+        return view('notaDinas.create');
     }
 
     public function store(Request $request)
@@ -81,14 +81,14 @@ class NotaDinasController extends Controller
     public function show($id)
     {
         $notaDinas = NotaDinas::findOrFail($id);
-        return view('notadinas.show', compact('notaDinas'));
+        return view('notaDinas.show', compact('notaDinas'));
     }
 
 
     public function edit($id)
     {
         $notaDinas = NotaDinas::findOrFail($id);
-        return view('notadinas.edit', compact('notaDinas'));
+        return view('notaDinas.edit', compact('notaDinas'));
     }
 
     public function update(Request $request, $id)
