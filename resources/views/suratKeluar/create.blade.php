@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="pengirim" class="col-sm-2 col-form-label">Pengirim</label>
+                    <label for="pengirim" class="col-sm-2 col-form-label">Tujuan</label>
                     <div class="col-sm-10">
                         <input type="text" name="tujuan" id="pengirim" class="form-control" value="{{ old('tujuan') }}" required>
                     </div>
