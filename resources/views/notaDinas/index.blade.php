@@ -75,9 +75,6 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('notaDinas.show', $nota->id) }}">
-                                                <i class="bx bx-eye me-1"></i> View
-                                            </a>
                                              <!-- Tombol Edit dan Delete hanya jika pengguna sudah login -->
                                              @auth
                                                     <a class="dropdown-item" href="{{ route('notaDinas.edit', $nota->id) }}">

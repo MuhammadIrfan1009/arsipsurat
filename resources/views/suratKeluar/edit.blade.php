@@ -35,7 +35,7 @@
 
     <div class="card mb-4">
         <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="mb-0">Edit Surat Masuk Form</h5>
+            <h5 class="mb-0">Edit Surat Keluar Form</h5>
             <small class="text-muted float-end">Update the necessary details</small>
         </div>
         <div class="card-body">
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="pengirim" class="col-sm-2 col-form-label">Pengirim</label>
+                    <label for="pengirim" class="col-sm-2 col-form-label">Tujuan</label>
                     <div class="col-sm-10">
                         <input type="text" name="tujuan" id="tujuan" class="form-control" value="{{ old('tujuan', $suratKeluar->tujuan) }}" required>
                     </div>

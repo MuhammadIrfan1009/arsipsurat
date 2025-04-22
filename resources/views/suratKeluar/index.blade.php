@@ -78,7 +78,6 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{ route('suratKeluar.show', $surat->id) }}">
-                                                <a class="dropdown-item" href="{{ route('suratKeluar.show', $surat->id) }}">
                                                     <i class="bx bx-eye me-1"></i> View
                                                 </a>
                                                 @auth
