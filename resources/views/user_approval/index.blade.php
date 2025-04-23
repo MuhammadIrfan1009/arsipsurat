@@ -29,7 +29,7 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($pendingUsers as $user)
                         <tr>
-                            <td>{{ $user->nama }}</td>
+                            <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
                                 <span class="badge bg-label-warning">{{ ucfirst($user->status) }}</span>
