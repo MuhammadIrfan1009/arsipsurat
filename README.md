@@ -106,19 +106,6 @@ routes/                 # Routing aplikasi
 storage/                # Penyimpanan file surat
 ```
 
-## 🤝 Kontribusi
-
-Kontribusi sangat terbuka! Silakan lakukan:
-
-1. Fork repository
-2. Buat branch fitur (`git checkout -b fitur-baru`)
-3. Commit perubahan (`git commit -m 'Menambahkan fitur baru'`)
-4. Push ke branch (`git push origin fitur-baru`)
-5. Buat Pull Request
-
-## 🔐 Keamanan
-
-Jika Anda menemukan celah keamanan, silakan laporkan secara pribadi dan **jangan** membuka issue publik.
 
 ## 📄 Lisensi
 
