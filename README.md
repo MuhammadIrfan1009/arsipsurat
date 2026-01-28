@@ -78,12 +78,6 @@ Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
 
 Aplikasi dapat diakses melalui: `http://localhost:8000`
 
-## 👤 Akun Default (Opsional)
-
-Jika tersedia seeder:
-
-* **Email**: [admin@example.com](mailto:admin@example.com)
-* **Password**: password
 
 ## 📂 Struktur Folder Proyek
 
