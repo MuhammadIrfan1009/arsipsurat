@@ -128,7 +128,7 @@
             jenisLayananLainnya.style.display = 'block';
         } else {
             jenisLayananLainnya.style.display = 'none';
-            jenisLayananLainnya.value = '';  // Clear the "Lainnya" input if not needed
+            jenisLayananLainnya.value = '';  
         }
     });
 </script>

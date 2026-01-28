@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'E-Komdigi')
+@section('title', 'Arsip Surat')
 
 @section('content')
 <div class="landing-page" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: url('{{ asset('assets/img/backgrounds/landing.png') }}') no-repeat center center; background-size: cover; z-index: -1;">

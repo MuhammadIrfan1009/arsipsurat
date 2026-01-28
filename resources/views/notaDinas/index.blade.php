@@ -5,7 +5,6 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Nota Dinas</span></h4>
 
     <div class="mb-3">
-            <!-- Show 'Add New Letter' button only if the user is authenticated -->
             @auth
                 <a href="{{ route('notaDinas.create') }}" class="btn btn-primary">Tambah Surat Baru</a>
             @else
@@ -55,13 +54,11 @@
                                     <a href="{{ route('notaDinas.show', $nota->id) }}" class="btn btn-secondary btn-sm">View</a>
                                 </td>
                                 <td>
-                                    <!-- Dropdown for Actions -->
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                             <!-- Tombol Edit dan Delete hanya jika pengguna sudah login -->
                                              @auth
                                                     <a class="dropdown-item" href="{{ route('notaDinas.edit', $nota->id) }}">
                                                         <i class="bx bx-edit-alt me-1"></i> Edit
@@ -75,7 +72,6 @@
                                                         </button>
                                                     </form>
                                                 @else
-                                                    <!-- Jika tidak login, tampilkan tombol untuk login -->
                                                     <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
                                                         <i class="bx bx-lock me-1"></i> Edit / Delete (Login Required)
                                                     </button>
@@ -91,11 +87,8 @@
         </div>
     @endif
 </div>
-<!-- Modal for Login and Cancel -->
 @auth
-        <!-- If the user is authenticated, nothing is shown for login -->
     @else
-        <!-- Show modal when trying to create, edit, or delete -->
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

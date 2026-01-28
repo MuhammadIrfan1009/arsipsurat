@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <!-- Jenis Layanan with dynamic behavior for 'Lainnya' option -->
+
                 @php
                     $predefinedLayanan = ['Live Streaming', 'Jaringan', 'Pembuatan Aplikasi', 'Pembuatan Subdomain & Hosting'];
                     $isCustomLayanan = !in_array($suratMasuk->jenis_layanan, $predefinedLayanan);
@@ -140,7 +140,7 @@
         jenisLayananLainnya.style.display = jenisLayananSelect.value === 'Lainnya' ? 'block' : 'none';
     });
 
-    // Pre-check if 'Lainnya' is selected, display input for it
+
     if (jenisLayananSelect.value === 'Lainnya') {
         jenisLayananLainnya.style.display = 'block';
     }

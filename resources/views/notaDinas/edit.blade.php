@@ -144,7 +144,6 @@
         }
     });
 
-    // Pre-check if 'Lainnya' is selected, display input for it
     if (jenisLayananSelect.value === 'Lainnya') {
         jenisLayananLainnya.style.display = 'block';
     }
