@@ -17,7 +17,7 @@ Aplikasi **Arsip Surat** adalah aplikasi berbasis web yang dibangun menggunakan 
 
 * **Framework**: Laravel
 * **Bahasa**: PHP
-* **Database**: MySQL / MariaDB
+* **Database**: SQLite (file database berada di folder `database/`)
 * **Frontend**: Blade Template, Bootstrap
 * **Authentication**: Laravel Auth
 * **Storage**: Local / Public Storage
@@ -34,7 +34,7 @@ Pastikan lingkungan pengembangan Anda memenuhi kebutuhan berikut:
 
 ## ⚙️ Instalasi
 
-Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal (menggunakan **SQLite**):
 
 1. **Clone repository**
 
@@ -61,8 +61,19 @@ Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
    php artisan key:generate
    ```
 
-5. **Konfigurasi database**
-   Sesuaikan konfigurasi database pada file `.env`
+5. **Konfigurasi database (SQLite)**
+   Pastikan file database berada di folder `database/`, contoh:
+
+   ```
+   database/database.sqlite
+   ```
+
+   Lalu atur konfigurasi berikut pada file `.env`:
+
+   ```env
+   DB_CONNECTION=sqlite
+   DB_DATABASE=database/database.sqlite
+   ```
 
 6. **Migrasi database**
 

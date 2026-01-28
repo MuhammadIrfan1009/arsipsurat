@@ -122,7 +122,7 @@
 
                 <div class="row justify-content-end">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Update Letter</button>
+                        <button type="submit" class="btn btn-primary">Update Surat</button>
                         <a href="{{ route('suratKeluar.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
